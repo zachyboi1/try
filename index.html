@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Click here Daney">
+    <meta property="og:description" content="Will you be my Valentine and Prom date?">
+    <meta property="og:image" content="your-image-link.jpg">
+    <title>Will You Be My Valentine and Prom Date?</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #F5E1F4;
+            color: #5B2E88;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #5B2E88;
+        }
+        .btn {
+            background-color: #9B59B6;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 10px;
+        }
+        .btn:hover {
+            background-color: #8E44AD;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+        img, video {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .page-container {
+            text-align: center;
+            padding: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .hidden {
+            display: none;
+        }
+        .music-container {
+            margin-top: 20px;
+        }
+        .bg-music {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="page1" class="page-container">
+        <h1>Will you be my Valentine?</h1>
+        <div class="btn-container">
+            <button class="btn" id="yes1">Yes</button>
+            <button class="btn" id="no1">No</button>
+        </div>
+    </div>
+
+    <div id="page2" class="page-container hidden">
+        <h1>Yey! Thank you, baby!</h1>
+        <img src="your-photo1.jpg" alt="Photo1">
+        <p>I love you, Daney</p>
+        <div class="music-container">
+            <button class="btn" id="playMusic">Play Background Music</button>
+            <audio class="bg-music" id="bgMusic" loop>
+                <source src="valentine-music.mp3" type="audio/mp3">
+            </audio>
+        </div>
+        <button class="btn" id="nextPage2">Another Question</button>
+    </div>
+
+    <div id="page3" class="page-container hidden">
+        <h1>Now that's out of the way,</h1>
+        <h2>Will you also be my Prom date?</h2>
+        <img src="your-photo2.jpg" alt="Photo2">
+        <div class="btn-container">
+            <button class="btn" id="yes2">Yes</button>
+            <button class="btn" id="no2">No</button>
+        </div>
+    </div>
+
+    <div id="page4" class="page-container hidden">
+        <h1>YEY! See you on Prom Night!</h1>
+        <video width="320" height="240" muted autoplay loop>
+            <source src="prom-video.mp4" type="video/mp4">
+        </video>
+        <p>I love you</p>
+        <audio id="loverboy" loop>
+            <source src="loverboy.mp3" type="audio/mp3">
+        </audio>
+    </div>
+
+    <script>
+        document.getElementById('yes1').addEventListener('click', () => {
+            document.getElementById('page1').classList.add('hidden');
+            document.getElementById('page2').classList.remove('hidden');
+        });
+
+        document.getElementById('no1').addEventListener('click', () => {
+            alert('Okay, maybe next time!');
+            document.getElementById('page1').classList.add('hidden');
+        });
+
+        document.getElementById('playMusic').addEventListener('click', () => {
+            const music = document.getElementById('bgMusic');
+            music.play();
+        });
+
+        document.getElementById('nextPage2').addEventListener('click', () => {
+            document.getElementById('page2').classList.add('hidden');
+            document.getElementById('page3').classList.remove('hidden');
+        });
+
+        document.getElementById('yes2').addEventListener('click', () => {
+            document.getElementById('page3').classList.add('hidden');
+            document.getElementById('page4').classList.remove('hidden');
+            document.getElementById('loverboy').play();
+        });
+
+        document.getElementById('no2').addEventListener('click', () => {
+            alert('It’s okay, maybe another time!');
+            document.getElementById('page3').classList.add('hidden');
+        });
+    </script>
+
+</body>
+</html>
