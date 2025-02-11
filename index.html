@@ -49,12 +49,11 @@
         .btn-container {
             display: flex;
             justify-content: center;
-            flex-direction: column;
-        }
-        .btn-container-side {
-            display: flex;
-            justify-content: center;
             flex-direction: row;
+        }
+        .btn-container .yes-no-button {
+            width: 120px;
+            margin: 10px;
         }
         img, video {
             max-width: 100%;
@@ -75,13 +74,10 @@
         .bg-music {
             display: none;
         }
-        .no-button-disabled {
-            cursor: not-allowed;
-            opacity: 0.6;
-        }
-        .yes-no-button {
-            width: 120px;
-            margin: 10px;
+        .no-button-moved {
+            position: relative;
+            left: 20px;
+            transition: left 0.5s;
         }
     </style>
 </head>
@@ -96,71 +92,72 @@
     </div>
 
     <div id="page2" class="page-container hidden">
-        <h1>Yey! Thank you, baby!</h1>
-        <img src="your-photo1.jpg" alt="Photo1">
-        <p>I love you, Daney</p>
+        <h2>Yey, Thank you baby!</h2>
+        <img src="photo1.jpg" alt="Sweet Photo" />
+        <p>I love you Daney</p>
         <div class="music-container">
-            <audio class="bg-music" id="bgMusic" loop autoplay>
-                <source src="valentine-music.mp3" type="audio/mp3">
+            <audio class="bg-music" autoplay loop>
+                <source src="valentine-song.mp3" type="audio/mp3">
             </audio>
         </div>
-        <button class="btn" id="nextPage2">Another Question</button>
+        <button class="btn yes-no-button" id="nextQuestion">Another question</button>
     </div>
 
     <div id="page3" class="page-container hidden">
-        <h1>Now that's out of the way,</h1>
-        <h2>Will you also be my <span style="font-size: 2.5rem; color: #9B59B6;">PROM DATE?</span></h2>
-        <img src="your-photo2.jpg" alt="Photo2">
-        <div class="btn-container-side">
+        <h2>Now that's out of the way...</h2>
+        <h2>Will you also be my Prom date?</h2>
+        <img src="photo2.jpg" alt="Prom Photo" />
+        <div class="btn-container">
             <button class="btn yes-no-button" id="yes2">Yes</button>
-            <button class="btn yes-no-button" id="no2" class="no-button">No</button>
+            <button class="btn yes-no-button" id="no2">No</button>
         </div>
     </div>
 
     <div id="page4" class="page-container hidden">
-        <h1>YEY! See you on Prom Night!</h1>
-        <video width="320" height="240" id="promVideo" muted autoplay loop>
-            <source src="prom-video.mp4" type="video/mp4">
+        <h2>YEY, see you on prom night!</h2>
+        <video id="promVideo" autoplay loop muted>
+            <source src="video1.mp4" type="video/mp4">
         </video>
         <p>I love you</p>
-        <audio id="loverboy" loop>
-            <source src="loverboy.mp3" type="audio/mp3">
+        <audio autoplay>
+            <source src="loverboy.mp3#t=0.46" type="audio/mp3">
         </audio>
     </div>
 
     <script>
-        document.getElementById('yes1').addEventListener('click', () => {
-            document.getElementById('page1').classList.add('hidden');
-            document.getElementById('page2').classList.remove('hidden');
+        document.getElementById("yes1").addEventListener("click", function() {
+            document.getElementById("page1").classList.add("hidden");
+            document.getElementById("page2").classList.remove("hidden");
         });
 
-        document.getElementById('no1').addEventListener('click', () => {
-            alert('Okay, maybe next time!');
-            document.getElementById('page1').classList.add('hidden');
+        document.getElementById("no1").addEventListener("click", function() {
+            document.getElementById("page1").classList.add("hidden");
+            document.getElementById("page3").classList.remove("hidden");
         });
 
-        // Automatically play the background music on page 2
-        document.getElementById('nextPage2').addEventListener('click', () => {
-            document.getElementById('page2').classList.add('hidden');
-            document.getElementById('page3').classList.remove('hidden');
+        document.getElementById("nextQuestion").addEventListener("click", function() {
+            document.getElementById("page2").classList.add("hidden");
+            document.getElementById("page3").classList.remove("hidden");
         });
 
-        document.getElementById('yes2').addEventListener('click', () => {
-            document.getElementById('page3').classList.add('hidden');
-            document.getElementById('page4').classList.remove('hidden');
-            let loverboy = document.getElementById('loverboy');
-            loverboy.currentTime = 46; // Start the song at 0:46
-            loverboy.play();
+        document.getElementById("yes2").addEventListener("click", function() {
+            document.getElementById("page3").classList.add("hidden");
+            document.getElementById("page4").classList.remove("hidden");
         });
 
-        document.getElementById('no2').addEventListener('click', () => {
-            document.getElementById('no2').classList.add('no-button-disabled');
-            setTimeout(() => {
-                alert('It’s okay, maybe another time!');
-                document.getElementById('page3').classList.add('hidden');
-            }, 500);
+        document.getElementById("no2").addEventListener("click", function() {
+            document.getElementById("page3").classList.add("hidden");
+            document.getElementById("page4").classList.remove("hidden");
+        });
+
+        // Move the "No" button for the first page and prom page
+        document.getElementById("no1").addEventListener("click", function() {
+            this.classList.add("no-button-moved");
+        });
+
+        document.getElementById("no2").addEventListener("click", function() {
+            this.classList.add("no-button-moved");
         });
     </script>
-
 </body>
 </html>
