@@ -3,161 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="Click here Daney">
-    <meta property="og:description" content="Will you be my Valentine and Prom date?">
-    <meta property="og:image" content="your-image-link.jpg">
-    <title>Will You Be My Valentine and Prom Date?</title>
+    <title>Valentine's Day Surprise</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #F5E1F4;
-            color: #5B2E88;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffcccb;
         }
         h1 {
-            font-size: 3rem;
-            text-align: center;
-            margin-bottom: 20px;
-            color: #5B2E88;
+            color: #d63384;
+            margin-top: 50px;
         }
-        h2 {
-            font-size: 2rem;
-            color: #5B2E88;
+        .container {
+            margin-top: 100px;
         }
-        .btn {
-            background-color: #9B59B6;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin: 10px;
-        }
-        .btn:hover {
-            background-color: #8E44AD;
-        }
-        .btn-container {
-            display: flex;
-            justify-content: center;
-            flex-direction: row;
-        }
-        .btn-container .yes-no-button {
-            width: 120px;
-            margin: 10px;
-        }
-        img, video {
-            max-width: 100%;
-            border-radius: 8px;
-        }
-        .page-container {
-            text-align: center;
-            padding: 20px;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        .hidden {
-            display: none;
-        }
-        .music-container {
+        .button-container {
             margin-top: 20px;
         }
-        .bg-music {
-            display: none;
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
         }
-        .no-button-moved {
-            position: relative;
-            left: 20px;
-            transition: left 0.5s;
+        #yes {
+            background-color: #ff69b4;
+            color: white;
+        }
+        #no {
+            background-color: #ff4444;
+            color: white;
+            position: absolute;
+        }
+    </style>
+    <script>
+        function moveNoButton() {
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 50);
+            document.getElementById('no').style.left = x + 'px';
+            document.getElementById('no').style.top = y + 'px';
+        }
+        function goToNextPage() {
+            window.location.href = "yes.html";
+        }
+    </script>
+</head>
+<body>
+    <h1>Will you be my Valentine? ❤️</h1>
+    <div class="container">
+        <div class="button-container">
+            <button id="yes" onclick="goToNextPage()">Yes</button>
+            <button id="no" onmouseover="moveNoButton()">No</button>
+        </div>
+    </div>
+</body>
+</html>
+
+<!-- yes.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yey! Thanks Baby</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffcccb;
+        }
+        h1 {
+            color: #d63384;
+            margin-top: 50px;
+        }
+        img {
+            max-width: 80%;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        p {
+            font-size: 24px;
+            color: #d63384;
+            font-weight: bold;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-
-    <div id="page1" class="page-container">
-        <h1>Will you be my Valentine?</h1>
-        <div class="btn-container">
-            <button class="btn yes-no-button" id="yes1">Yes</button>
-            <button class="btn yes-no-button" id="no1">No</button>
-        </div>
-    </div>
-
-    <div id="page2" class="page-container hidden">
-        <h2>Yey, Thank you baby!</h2>
-        <img src="photo1.jpg" alt="Sweet Photo" />
-        <p>I love you Daney</p>
-        <div class="music-container">
-            <audio class="bg-music" autoplay loop>
-                <source src="valentine-song.mp3" type="audio/mp3">
-            </audio>
-        </div>
-        <button class="btn yes-no-button" id="nextQuestion">Another question</button>
-    </div>
-
-    <div id="page3" class="page-container hidden">
-        <h2>Now that's out of the way...</h2>
-        <h2>Will you also be my Prom date?</h2>
-        <img src="photo2.jpg" alt="Prom Photo" />
-        <div class="btn-container">
-            <button class="btn yes-no-button" id="yes2">Yes</button>
-            <button class="btn yes-no-button" id="no2">No</button>
-        </div>
-    </div>
-
-    <div id="page4" class="page-container hidden">
-        <h2>YEY, see you on prom night!</h2>
-        <video id="promVideo" autoplay loop muted>
-            <source src="video1.mp4" type="video/mp4">
-        </video>
-        <p>I love you</p>
-        <audio autoplay>
-            <source src="loverboy.mp3#t=0.46" type="audio/mp3">
-        </audio>
-    </div>
-
-    <script>
-        document.getElementById("yes1").addEventListener("click", function() {
-            document.getElementById("page1").classList.add("hidden");
-            document.getElementById("page2").classList.remove("hidden");
-        });
-
-        document.getElementById("no1").addEventListener("click", function() {
-            document.getElementById("page1").classList.add("hidden");
-            document.getElementById("page3").classList.remove("hidden");
-        });
-
-        document.getElementById("nextQuestion").addEventListener("click", function() {
-            document.getElementById("page2").classList.add("hidden");
-            document.getElementById("page3").classList.remove("hidden");
-        });
-
-        document.getElementById("yes2").addEventListener("click", function() {
-            document.getElementById("page3").classList.add("hidden");
-            document.getElementById("page4").classList.remove("hidden");
-        });
-
-        document.getElementById("no2").addEventListener("click", function() {
-            document.getElementById("page3").classList.add("hidden");
-            document.getElementById("page4").classList.remove("hidden");
-        });
-
-        // Move the "No" button for the first page and prom page
-        document.getElementById("no1").addEventListener("click", function() {
-            this.classList.add("no-button-moved");
-        });
-
-        document.getElementById("no2").addEventListener("click", function() {
-            this.classList.add("no-button-moved");
-        });
-    </script>
+    <h1>Yey! Thanks, baby! ❤️</h1>
+    <img src="photo1.jpg" alt="Our Photo">
+    <p>I love you, Daney! 💖</p>
 </body>
 </html>
