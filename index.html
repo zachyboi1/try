@@ -26,6 +26,10 @@
             margin-bottom: 20px;
             color: #5B2E88;
         }
+        h2 {
+            font-size: 2rem;
+            color: #5B2E88;
+        }
         .btn {
             background-color: #9B59B6;
             color: white;
@@ -33,7 +37,7 @@
             padding: 15px 30px;
             text-align: center;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1rem;
             border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.3s;
@@ -46,6 +50,11 @@
             display: flex;
             justify-content: center;
             flex-direction: column;
+        }
+        .btn-container-side {
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
         }
         img, video {
             max-width: 100%;
@@ -66,6 +75,14 @@
         .bg-music {
             display: none;
         }
+        .no-button-disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        .yes-no-button {
+            width: 120px;
+            margin: 10px;
+        }
     </style>
 </head>
 <body>
@@ -73,8 +90,8 @@
     <div id="page1" class="page-container">
         <h1>Will you be my Valentine?</h1>
         <div class="btn-container">
-            <button class="btn" id="yes1">Yes</button>
-            <button class="btn" id="no1">No</button>
+            <button class="btn yes-no-button" id="yes1">Yes</button>
+            <button class="btn yes-no-button" id="no1">No</button>
         </div>
     </div>
 
@@ -83,8 +100,7 @@
         <img src="your-photo1.jpg" alt="Photo1">
         <p>I love you, Daney</p>
         <div class="music-container">
-            <button class="btn" id="playMusic">Play Background Music</button>
-            <audio class="bg-music" id="bgMusic" loop>
+            <audio class="bg-music" id="bgMusic" loop autoplay>
                 <source src="valentine-music.mp3" type="audio/mp3">
             </audio>
         </div>
@@ -93,17 +109,17 @@
 
     <div id="page3" class="page-container hidden">
         <h1>Now that's out of the way,</h1>
-        <h2>Will you also be my Prom date?</h2>
+        <h2>Will you also be my <span style="font-size: 2.5rem; color: #9B59B6;">PROM DATE?</span></h2>
         <img src="your-photo2.jpg" alt="Photo2">
-        <div class="btn-container">
-            <button class="btn" id="yes2">Yes</button>
-            <button class="btn" id="no2">No</button>
+        <div class="btn-container-side">
+            <button class="btn yes-no-button" id="yes2">Yes</button>
+            <button class="btn yes-no-button" id="no2" class="no-button">No</button>
         </div>
     </div>
 
     <div id="page4" class="page-container hidden">
         <h1>YEY! See you on Prom Night!</h1>
-        <video width="320" height="240" muted autoplay loop>
+        <video width="320" height="240" id="promVideo" muted autoplay loop>
             <source src="prom-video.mp4" type="video/mp4">
         </video>
         <p>I love you</p>
@@ -123,11 +139,7 @@
             document.getElementById('page1').classList.add('hidden');
         });
 
-        document.getElementById('playMusic').addEventListener('click', () => {
-            const music = document.getElementById('bgMusic');
-            music.play();
-        });
-
+        // Automatically play the background music on page 2
         document.getElementById('nextPage2').addEventListener('click', () => {
             document.getElementById('page2').classList.add('hidden');
             document.getElementById('page3').classList.remove('hidden');
@@ -136,12 +148,17 @@
         document.getElementById('yes2').addEventListener('click', () => {
             document.getElementById('page3').classList.add('hidden');
             document.getElementById('page4').classList.remove('hidden');
-            document.getElementById('loverboy').play();
+            let loverboy = document.getElementById('loverboy');
+            loverboy.currentTime = 46; // Start the song at 0:46
+            loverboy.play();
         });
 
         document.getElementById('no2').addEventListener('click', () => {
-            alert('It’s okay, maybe another time!');
-            document.getElementById('page3').classList.add('hidden');
+            document.getElementById('no2').classList.add('no-button-disabled');
+            setTimeout(() => {
+                alert('It’s okay, maybe another time!');
+                document.getElementById('page3').classList.add('hidden');
+            }, 500);
         });
     </script>
 
